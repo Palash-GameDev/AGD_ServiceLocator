@@ -14,9 +14,8 @@ namespace ServiceLocator.Wave
     {
         [SerializeField] private EventService eventService;
         [SerializeField] private UIService uiService;
-        [SerializeField] private MapService mapService;
         [SerializeField] private SoundService soundService;
-        [SerializeField] private PlayerService playerService;
+       
 
         [SerializeField] private WaveScriptableObject waveScriptableObject;
         private BloonPool bloonPool;
@@ -33,7 +32,7 @@ namespace ServiceLocator.Wave
 
         private void InitializeBloons()
         {
-            bloonPool = new BloonPool(playerService, this, soundService, waveScriptableObject);
+            bloonPool = new BloonPool( this, soundService, waveScriptableObject);
             activeBloons = new List<BloonController>();
         }
 
@@ -50,7 +49,7 @@ namespace ServiceLocator.Wave
         {
             currentWaveId++;
             var bloonsToSpawn = GetBloonsForCurrentWave();
-            var spawnPosition = mapService.GetBloonSpawnPositionForCurrentMap();
+            var spawnPosition = MapService.Instance.GetBloonSpawnPositionForCurrentMap();
             SpawnBloons(bloonsToSpawn, spawnPosition, 0, waveScriptableObject.SpawnRate);
         }
 
@@ -60,7 +59,7 @@ namespace ServiceLocator.Wave
             {
                 BloonController bloon = bloonPool.GetBloon(bloonType);
                 bloon.SetPosition(spawnPosition);
-                bloon.SetWayPoints(mapService.GetWayPointsForCurrentMap(), startingWaypointIndex);
+                bloon.SetWayPoints(MapService.Instance.GetWayPointsForCurrentMap(), startingWaypointIndex);
 
                 AddBloon(bloon);
                 await Task.Delay(Mathf.RoundToInt(spawnRate * 1000));
