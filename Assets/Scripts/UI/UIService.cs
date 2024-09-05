@@ -9,7 +9,7 @@ using ServiceLocator.Player;
 
 namespace ServiceLocator.UI
 {
-    public class UIService : MonoBehaviour
+    public class UIService : GenericMonoSingleton<UIService>
     {
         [SerializeField] private EventService eventService;
         [SerializeField] private WaveService waveService;

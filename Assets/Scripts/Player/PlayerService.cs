@@ -7,7 +7,7 @@ using ServiceLocator.Sound;
 
 namespace ServiceLocator.Player
 {
-    public class PlayerService : MonoBehaviour
+    public class PlayerService : GenericMonoSingleton<PlayerService>
     {
         [SerializeField] private UIService uiService;
        
@@ -22,22 +22,7 @@ namespace ServiceLocator.Player
         private int health;
         public int Money { get; private set; }
 
-        public static PlayerService Instance { get { return instance; } }
-        private static PlayerService instance;
 
-        void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-                Debug.LogError("singleton of PlayerService is trying to create another instance");
-            }
-
-        }
 
         private void Start()
         {
@@ -61,7 +46,7 @@ namespace ServiceLocator.Player
                 TrySelectingMonkey();
             }
         }
-
+        
         private void TrySelectingMonkey()
         {
             RaycastHit2D[] hits = GetRaycastHitsAtMousePoition();

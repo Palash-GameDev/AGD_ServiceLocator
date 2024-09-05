@@ -153,9 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiService: {fileID: 1107832201}
-  mapService: {fileID: 1775323201}
   soundService: {fileID: 1608414551}
-  playerService: {fileID: 81048208}
   playerScriptableObject: {fileID: 11400000, guid: ba423c4fbfbefa248b49a627b9e607b6, type: 2}
 --- !u!4 &81048209
 Transform:
@@ -410,9 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventService: {fileID: 338547895}
   uiService: {fileID: 1107832201}
-  mapService: {fileID: 1775323201}
   soundService: {fileID: 1608414551}
-  playerService: {fileID: 81048208}
   waveScriptableObject: {fileID: 11400000, guid: 1a1805a3a12f21d4c9847d85958ab9ce, type: 2}
 --- !u!4 &1241429279
 Transform:
@@ -642,7 +638,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775323200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
