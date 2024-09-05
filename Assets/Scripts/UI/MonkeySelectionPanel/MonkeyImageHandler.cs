@@ -35,7 +35,8 @@ namespace ServiceLocator.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            rectTransform.anchoredPosition += eventData.delta;
+            // rectTransform.anchoredPosition += eventData.delta;
+            transform.position = Input.mousePosition;
             owner.MonkeyDraggedAt(eventData.position);
         }
 

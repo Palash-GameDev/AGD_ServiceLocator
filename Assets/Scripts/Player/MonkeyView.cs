@@ -26,6 +26,22 @@ namespace ServiceLocator.Player
             MakeRangeVisible(false);
         }
 
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent<BloonView> (out BloonView bloonView))
+            {
+                controller.BloonEnteredRange(bloonView.Controller);
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.TryGetComponent<BloonView> (out BloonView bloonView))
+            {
+                controller.BloonExitedRange(bloonView.Controller);
+            }
+        }
+
         public void PlayAnimation(MonkeyAnimation animationToPlay) => monkeyAnimator.Play(animationToPlay.ToString(), 0);
 
         public void MakeRangeVisible(bool makeVisible) => RangeSpriteRenderer.color = makeVisible ? new Color(1, 1, 1, 0.25f) : new Color(1, 1, 1, 0);
