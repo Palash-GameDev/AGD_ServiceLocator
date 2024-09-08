@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 namespace ServiceLocator.UI
 {
-    public class MonkeyImageHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler
+    public class MonkeyImageHandler
+        : MonoBehaviour,
+            IPointerDownHandler,
+            IDragHandler,
+            IEndDragHandler
     {
         private RectTransform rectTransform;
         private Image monkeyImage;
@@ -31,11 +35,13 @@ namespace ServiceLocator.UI
             originalAnchoredPosition = rectTransform.anchoredPosition;
         }
 
-        public void OnPointerDown(PointerEventData eventData) => monkeyImage.color = new Color(1, 1, 1, 0.6f);
+        public void OnPointerDown(PointerEventData eventData) =>
+            monkeyImage.color = new Color(1, 1, 1, 0.6f);
 
         public void OnDrag(PointerEventData eventData)
         {
             // rectTransform.anchoredPosition += eventData.delta;
+
             transform.position = Input.mousePosition;
             owner.MonkeyDraggedAt(eventData.position);
         }
