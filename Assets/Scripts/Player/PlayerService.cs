@@ -25,7 +25,7 @@ namespace ServiceLocator.Player
         public PlayerService(PlayerScriptableObject playerScriptableObject)
         {
             this.playerScriptableObject = playerScriptableObject;
-            projectilePool = new ProjectilePool(
+            projectilePool = new ProjectilePool(this,
                 playerScriptableObject.ProjectilePrefab,
                 playerScriptableObject.ProjectileScriptableObjects
             );
@@ -124,7 +124,7 @@ namespace ServiceLocator.Player
             MonkeyScriptableObject monkeyScriptableObject = GetMonkeyScriptableObjectByType(
                 monkeyType
             );
-            MonkeyController monkey = new MonkeyController(monkeyScriptableObject, projectilePool);
+            MonkeyController monkey = new MonkeyController(monkeyScriptableObject, projectilePool,soundService);
 
             monkey.SetPosition(spawnPosition);
             activeMonkeys.Add(monkey);
@@ -135,8 +135,7 @@ namespace ServiceLocator.Player
         private MonkeyScriptableObject GetMonkeyScriptableObjectByType(MonkeyType monkeyType) =>
             playerScriptableObject.MonkeyScriptableObjects.Find(so => so.Type == monkeyType);
 
-        public void ReturnProjectileToPool(ProjectileController projectileToReturn) =>
-            projectilePool.ReturnItem(projectileToReturn);
+        public void ReturnProjectileToPool(ProjectileController projectileToReturn) =>  projectilePool.ReturnItem(projectileToReturn);
 
         public void TakeDamage(int damageToTake)
         {

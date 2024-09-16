@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 using ServiceLocator.Events;
 using ServiceLocator.Map;
 using ServiceLocator.Wave;
+using ServiceLocator.Player;
+
 
 namespace ServiceLocator.UI
 {
@@ -23,6 +25,7 @@ namespace ServiceLocator.UI
         [Header("Level Selection Panel")]
         [SerializeField] private GameObject levelSelectionPanel;
         [SerializeField] private Button Map1Button;
+        [SerializeField] private MapButton mapButton;
 
         [Header("Monkey Selection UI")]
         private MonkeySelectionUIController monkeySelectionController;
@@ -39,13 +42,13 @@ namespace ServiceLocator.UI
 
         private EventService eventService;
         private WaveService waveService;
+        private PlayerService playerservice;
+
 
 
         private void Start()
         {
-            monkeySelectionController = new MonkeySelectionUIController(cellContainer, monkeyCellPrefab, monkeyCellScriptableObjects);
-            MonkeySelectionPanel.SetActive(false);
-            monkeySelectionController.SetActive(false);
+
 
             gameplayPanel.SetActive(false);
             levelSelectionPanel.SetActive(true);
@@ -58,11 +61,21 @@ namespace ServiceLocator.UI
 
         public void SubscribeToEvents() => eventService.OnMapSelected.AddListener(OnMapSelected);
 
-        public void Init(EventService eventService, WaveService waveService)
+        public void Init(EventService eventService, WaveService waveService, PlayerService playerService)
         {
             this.eventService = eventService;
             this.waveService = waveService;
+            this.playerservice = playerService;
+
+            mapButton.Init(eventService);
+            InitializeMonkeySelectionUI(playerService);
             SubscribeToEvents();
+        }
+        private void InitializeMonkeySelectionUI(PlayerService playerService)
+        {
+            monkeySelectionController = new MonkeySelectionUIController(playerService, cellContainer, monkeyCellPrefab, monkeyCellScriptableObjects);
+            MonkeySelectionPanel.SetActive(false);
+            monkeySelectionController.SetActive(false);
         }
 
         public void OnMapSelected(int mapID)
